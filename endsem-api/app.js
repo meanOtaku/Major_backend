@@ -38,7 +38,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const dbURIlocal = 'mongodb://localhost:27017/items'
-const dbURI = 'mongodb+srv://honeybisht123:honeybisht123@nodepro.a6gzy.mongodb.net/itemslost&found?retryWrites=true&w=majority';
+const dbURI = 'your own key';
 mongoose.connect(dbURIlocal, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
   .then((result) => app.listen(port, function(){
       console.log("Server Running at port " + port);
