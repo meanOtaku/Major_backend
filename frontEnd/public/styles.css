@@ -5,10 +5,43 @@
     width: 80%;
     margin: 1rem auto;
 }
-
+.parent{
+    display: flex;
+}
 .card{
-    
-    display: block;
+
     width: 80%;
-    margin: 1rem auto;
+    margin: 1rem;
+}
+
+footer{
+    clear: both;
+    position: relative;
+    height: 30px;
+    margin-top: 20px;
+    background: skyblue;
+}
+
+.img_parent{
+    display: flex;
+}
+
+.img_{
+    size: 50px;
+
+    margin: 1rem;
+}
+
+.nav_parent{
+    display: flex;
+}
+.cropped {
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover;
+    object-position: 20% 10%; 
+    border: 2x solid black;
+}
+.info{
+    margin: 2rem;
 }

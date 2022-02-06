@@ -1,14 +1,38 @@
 <%- include('partials/header') -%> 
-    <P>Home</P>
-    <% items.forEach(function(item){ %>
-            <div class="card" style="width: 18rem;">
-                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                <div class="card-body">
-                  <h5 class="card-title"><%= item.title %></h5>
-                  <p class="card-text"><%= item.content %></p>
-                  <p class="card-text">Found By: <%= item.username %></p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-    <% }) %> 
+    <h3 class="display-4">
+      Lost Items
+    </h3>
+    <div class="parent">
+      <% items.forEach(function(item){ %>
+        <% if(item.contentType == 'Lost') { %>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top cropped" width="100px" src="http://localhost:8000/<%= item.img[0] %>" alt="<%= item.img[0] %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= item.title %></h5>
+              <p class="card-text"><%= item.content %></p>
+              <p class="card-text">Found By: <%= item.username %></p>
+              <a href="/item/<%= item._id %> " class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        <% } %>  
+      <% }) %> 
+    </div>
+    <h3 class="display-4">
+      Found Items
+    </h3>
+    <div class="parent">
+      <% items.forEach(function(item){ %>
+        <% if(item.contentType == 'Found') { %>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top cropped" width="100px" src="http://localhost:8000/<%= item.img[0] %>" alt="<%= item.img[0] %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= item.title %></h5>
+              <p class="card-text"><%= item.content %></p>
+              <p class="card-text">Found By: <%= item.username %></p>
+              <a href="/item/<%= item._id %> " class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        <% } %>  
+      <% }) %>
+    </div>
 <%- include('partials/footer') -%> 

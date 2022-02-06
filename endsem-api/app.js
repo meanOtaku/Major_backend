@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import fetch from 'node-fetch';
 import mongoose from 'mongoose';
+import _ from 'lodash';
 const app = express();
 const port = process.env.PORT || 5000
 
@@ -23,11 +24,12 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    img: [{
+    username: {
         type: String,
-        unique: true
-    }],
-})
+        required: true
+    },
+    img: [String],
+},{ timestamps: true })
 
 const Item = mongoose.model("Item", itemSchema);
 
@@ -69,9 +71,10 @@ app.route("/item")
 .post(function(req, res){
     var datetime = new Date();
     const newItem = new Item({
-        title: req.body.title.trim(),
-        content: req.body.content.trim(),
-        contentType: req.body.contentType.trim(),
+        title: _.capitalize(req.body.title.trim()),
+        content: _.capitalize(req.body.content.trim()),
+        contentType: _.capitalize(req.body.contentType.trim()),
+        username: req.body.username.trim(),
         Date: datetime,
         //AgeGroupRecommendation: req.body.AgeGroupRecommendation.trim()
     })
@@ -82,7 +85,7 @@ app.route("/item")
             res.send("successfully added a new Item");
         }else{
             console.log(err);
-            res.send(err);
+            res.send("Please try again (Try changing Title)");
         }
     });
 })
@@ -203,4 +206,34 @@ app.route("/item/:item_id/deleteImg")
             }
         }
     )
+});
+
+//Time base search
+
+app.route("/item/time/:time")
+
+.get(function(req, res){
+    console.log(req.params.time);
+    Item.find( { createdOn: { $lte: req.params.time } } )
+    .limit( 10 )
+    .sort( '-createdOn' )
+    .then((result) => {
+        console.log(result);
+        res.send(result);
+    })
+});
+
+// For User based search
+app.route("/item/username/:user_name")
+
+//finished
+.get(function(req, res){
+    Item.find({username: req.params.user_name}, function(err, foundItem){
+        if(foundItem){
+            console.log("Item Sended");
+            res.send(foundItem);
+        }else{
+            res.send("No item matching");
+        }
+    });
 });

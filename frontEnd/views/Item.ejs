@@ -1,0 +1,24 @@
+<%- include('partials/header') %> 
+<div class="info jumbotron">   
+    <h1 class="heading display-4">
+        <%= item.title %> 
+    </h1>
+    <div class="lead">
+        <h4>
+            <%= item.content %> 
+        </h4>
+        <h6>
+            <%= item.contentType.toUpperCase() %> on <%= item.Date %>  
+        </h6>
+    </div>
+    <div class="img_parent">
+        <% item.img.forEach(function(image){ %> 
+
+            <div class="img_">
+                <img src="http://localhost:8000/<%= image %>" width="190px" alt="Lost" class="img-thumbnail">
+            </div>
+        
+        <% }) %> 
+    </div>
+</div>
+<%- include('partials/footer') %> 

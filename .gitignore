@@ -4,3 +4,4 @@ endsem-imgUpload\images
 endsem-api\node_modules
 endsem-api\diag.io.drawio
 frontEnd\node_modules
+*/.gitignore

@@ -9,10 +9,10 @@ import fetch from "node-fetch"
 //Routes Require
 
 import homeRoute from './routes/homeRoutes.js';
-// import authRoute from './routes/authRoutes.js';
-// import itemRoute from './routes/itemRoutes.js';
-// import uploadRoute from './routes/uploadRoutes.js';
+import itemRoute from './routes/itemRoutes.js';
+//import uploadRoute from './routes/uploadRoutes.js';
 // import userRoute from './routes/userRoutes.js';
+// import authRoute from './routes/authRoutes.js';
 
 
 const app = express();
@@ -38,7 +38,7 @@ app.use('/', homeRoute);
 app.use('/home', (req, res) => {
     res.redirect('/');
 })
-// app.use('/item', itemRoute);
+app.use('/item', itemRoute);
 // app.use('/user', userRoute);
 // app.use('/upload', uploadRoute);
 // app.use(authRoute);
