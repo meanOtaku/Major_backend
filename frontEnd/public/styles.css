@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap%27);
+.foot{
+    display: block;
+    text-align: center;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.card{
+    
+    display: block;
+    width: 80%;
+    margin: 1rem auto;
+}

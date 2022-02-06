@@ -1,0 +1,14 @@
+<%- include('partials/header') -%> 
+    <P>Home</P>
+    <% items.forEach(function(item){ %>
+            <div class="card" style="width: 18rem;">
+                <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.title %></h5>
+                  <p class="card-text"><%= item.content %></p>
+                  <p class="card-text">Found By: <%= item.username %></p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+    <% }) %> 
+<%- include('partials/footer') -%> 

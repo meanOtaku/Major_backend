@@ -68,6 +68,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/:id/fileupload', upload.single('image'),(req, res) => {
+      if (!fs.existsSync('images')){
+        fs.mkdirSync('images');
+    }
     var dir = 'images/' + req.params.id;
     var url = 'http://localhost:5000/item/' + req.params.id ;
     if (!fs.existsSync(dir)){
