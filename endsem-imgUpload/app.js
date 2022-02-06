@@ -1,5 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+
+import _ from "lodash";
+
 const app = express();
 import multer from 'multer';
 import fs from 'fs';
@@ -29,7 +32,7 @@ var storage = multer.diskStorage({
       cb(null, 'uploads');
    },
    filename: function (req, file, cb) {
-      cb(null,file.originalname);
+      cb(null,file.originalname.replace(/ /g,''));
    }
 });
 var upload = multer({ storage: storage });
@@ -61,7 +64,7 @@ var upload = multer({ storage: storage });
 
 
 app.get('/', (req, res) => {
-    res.send("hi");
+    res.send(__dirname+"\\"+'images' );
 });
 
 app.post('/:id/fileupload', upload.single('image'),(req, res) => {
@@ -73,7 +76,7 @@ app.post('/:id/fileupload', upload.single('image'),(req, res) => {
     const image = req.file.filename;
     var oldpath = path.join(__dirname, '/uploads/', image);
     var newPath = path.join(__dirname, dir , '/' , image)
-    var fulldir = dir + "/" + image;
+    var fulldir = req.params.id + "/" + image;
     //fulldir = fulldir.replace(/\//g, "~");
     var data = {
       img: fulldir,
@@ -93,7 +96,7 @@ app.post('/:id/fileupload', upload.single('image'),(req, res) => {
 
 app.delete('/:id/:filename', (req, res) => {
     var url = 'http://localhost:5000/item/' + req.params.id + '/' +'deleteImg';
-    var filetoDelete = 'images' + "/" + req.params.id + "/" + req.params.filename ;
+    var filetoDelete = req.params.id + "/" + req.params.filename ;
     var dir = 'images/' + req.params.id;
     var image = req.params.filename;
     var Path = path.join(__dirname, dir , '/' , image)
